@@ -211,7 +211,6 @@ class StartedScreenWebPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
-    final double screenWidth = MediaQuery.of(context).size.width;
 
     return Stack(
       children: <Widget>[
@@ -235,6 +234,8 @@ class StartedScreenWebPage extends StatelessWidget {
         SafeArea(
           child: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.only(top: screenHeight * 0.1),
@@ -242,9 +243,11 @@ class StartedScreenWebPage extends StatelessWidget {
                     opacity: titleOpacity,
                     duration: const Duration(seconds: 1),
                     child: AppBar(
-                      title: const Text('Travel Tour App'),
-                      titleTextStyle: const TextStyle(
-                        fontSize: 36,
+                      title: const Text(
+                        'Travel Tour App',
+                      ),
+                      titleTextStyle: TextStyle(
+                        fontSize: MediaQuery.of(context).size.width * 0.04,
                         color: Colors.white54,
                         fontWeight: FontWeight.w600,
                         fontFamily: 'Poppins',
@@ -255,97 +258,104 @@ class StartedScreenWebPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                AnimatedOpacity(
-                  opacity: descriptionOpacity,
-                  duration: const Duration(seconds: 1),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Text(
-                      'Explore the world with us. Discover new places and adventures. '
-                      'Join our community of travelers and share your experiences. '
-                      'Find the best travel deals and tips to make your journey unforgettable.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontFamily: 'Nunito',
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                AnimatedOpacity(
-                  opacity: descriptionOpacity,
-                  duration: const Duration(seconds: 1),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Text(
-                      'Our app offers a wide range of features to enhance your travel experience. '
-                      'From personalized recommendations to real-time updates, we have everything you need to make your trip memorable. '
-                      'Join millions of satisfied travelers who trust our app for their adventures.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontFamily: 'Nunito',
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                AnimatedOpacity(
-                  opacity: descriptionOpacity,
-                  duration: const Duration(seconds: 1),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Text(
-                      'Why choose us?\n\n'
-                      '1. Comprehensive Travel Guides: Get detailed information about your destination, including top attractions, local cuisine, and cultural insights.\n'
-                      '2. Exclusive Deals: Access special offers and discounts on flights, hotels, and activities.\n'
-                      '3. User-Friendly Interface: Enjoy a seamless and intuitive user experience with our easy-to-navigate app.\n'
-                      '4. 24/7 Customer Support: Our dedicated support team is always here to help you with any questions or concerns.\n'
-                      '5. Community Engagement: Connect with fellow travelers, share your stories, and get inspired by others\' experiences.',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontFamily: 'Nunito',
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                AnimatedPadding(
-                  padding: EdgeInsets.only(bottom: buttonPadding),
-                  duration: const Duration(seconds: 1),
-                  child: AnimatedOpacity(
-                    opacity: buttonOpacity,
-                    duration: const Duration(seconds: 1),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return const LoginScreen();
-                        }));
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.amberAccent,
-                        padding: EdgeInsets.symmetric(
-                            horizontal: screenWidth * 0.3, vertical: 15),
-                        textStyle: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Poppins',
+                Container(
+                  margin: const EdgeInsets.only(top: 100),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      AnimatedOpacity(
+                        opacity: descriptionOpacity,
+                        duration: const Duration(seconds: 1),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Text(
+                            'Explore the world with us. Discover new places and adventures. '
+                            'Join our community of travelers and share your experiences. '
+                            'Find the best travel deals and tips to make your journey unforgettable.',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.03,
+                                color: Colors.white,
+                                fontFamily: 'Nunito',
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
-                      child: const Text(
-                        'Get Started',
-                        style: TextStyle(color: Colors.white),
+                      const SizedBox(height: 20),
+                      AnimatedOpacity(
+                        opacity: descriptionOpacity,
+                        duration: const Duration(seconds: 1),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Text(
+                            'Our app offers a wide range of features to enhance your travel experience. '
+                            'From personalized recommendations to real-time updates, we have everything you need to make your trip memorable. '
+                            'Join millions of satisfied travelers who trust our app for their adventures.',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.0150,
+                              color: Colors.white,
+                              fontFamily: 'Nunito',
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
+                      const SizedBox(height: 20),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        margin: const EdgeInsets.only(left: 20),
+                        child: AnimatedPadding(
+                          padding: EdgeInsets.only(bottom: buttonPadding),
+                          duration: const Duration(seconds: 1),
+                          child: AnimatedOpacity(
+                            opacity: buttonOpacity,
+                            duration: const Duration(seconds: 1),
+                            child: IntrinsicWidth(
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return const LoginScreen();
+                                  }));
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  backgroundColor: Colors.amberAccent,
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 15,
+                                      horizontal:
+                                          MediaQuery.of(context).size.width *
+                                              0.02),
+                                  textStyle: const TextStyle(
+                                    fontSize: 36,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Poppins',
+                                  ),
+                                ),
+                                child: const Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    'Get Started',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                    ],
                   ),
-                ),
-                const SizedBox(height: 30),
+                )
               ],
             ),
           ),
