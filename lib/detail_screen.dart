@@ -47,7 +47,9 @@ class _DetailScreenState extends State<DetailScreenMobilePage> {
                   Stack(
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20)),
                         child: Image.asset(
                           widget.place.imageAsset,
                           height: 450,
