@@ -1,15 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:submission_dicoding_flutter/model/travel_place.dart';
 
-class DetailScreen extends StatefulWidget {
+class DetailScreen extends StatelessWidget {
   final TravelPlace place;
   const DetailScreen({super.key, required this.place});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth > 600) {
+            return DetailScreenWebPage(place: place);
+          } else {
+            return DetailScreenMobilePage(place: place);
+          }
+        },
+      ),
+    );
+  }
+}
+
+class DetailScreenMobilePage extends StatefulWidget {
+  final TravelPlace place;
+  const DetailScreenMobilePage({super.key, required this.place});
 
   @override
   _DetailScreenState createState() => _DetailScreenState();
 }
 
-class _DetailScreenState extends State<DetailScreen> {
+class _DetailScreenState extends State<DetailScreenMobilePage> {
   bool isFavorite = false;
 
   @override
@@ -209,6 +229,76 @@ class _DetailScreenState extends State<DetailScreen> {
           ],
         );
       },
+    );
+  }
+}
+
+class DetailScreenWebPage extends StatelessWidget {
+  final TravelPlace place;
+
+  const DetailScreenWebPage({super.key, required this.place});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(place.name),
+        backgroundColor: Colors.amberAccent,
+      ),
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(40.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.asset(
+                        place.imageAsset,
+                        fit: BoxFit.cover,
+                        height: 400,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 40),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          place.name,
+                          style: const TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        Text(
+                          place.location,
+                          style: const TextStyle(
+                            fontSize: 24,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        Text(
+                          place.description,
+                          style: const TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

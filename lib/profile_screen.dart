@@ -6,6 +6,25 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth > 600) {
+            return const ProfileScreenWebPage();
+          } else {
+            return const ProfileScreenMobilePage();
+          }
+        },
+      ),
+    );
+  }
+}
+
+class ProfileScreenMobilePage extends StatelessWidget {
+  const ProfileScreenMobilePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Stack(
@@ -103,6 +122,103 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ProfileScreenWebPage extends StatelessWidget {
+  const ProfileScreenWebPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    return Scaffold(
+      appBar: AppBar(title: const Text('Profile')),
+      body: Center(
+        child: Container(
+          width: screenWidth * 0.5, // Use half of the screen width
+          padding: const EdgeInsets.all(40.0),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16.0),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 10,
+                offset: Offset(0, 5),
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: Image.asset(
+                  'assets/images/user.jpg',
+                  width: 150,
+                  height: 150,
+                  fit: BoxFit.cover,
+                  cacheWidth: 300,
+                  cacheHeight: 300,
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20),
+                child: Column(
+                  children: [
+                    const Text(
+                      'Tarisya Marufi',
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Text(
+                      'tarisamarufi@gmail.com',
+                      style: TextStyle(fontSize: 18, color: Colors.grey),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 20, horizontal: 20),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.redAccent,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            padding: const EdgeInsets.symmetric(vertical: 16.0),
+                          ),
+                          icon: const Icon(Icons.logout),
+                          label: const Text(
+                            'Logout',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const LoginScreen(),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
